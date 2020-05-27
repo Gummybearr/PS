@@ -19,26 +19,10 @@ int main(void) {
 		}
 		sort(v.begin(), v.end());
 		int cnt = 1;
-		int notyet = 0;
-		for (int i = 0; i < v.size(); i++) {
-			//printf("i: %d \tcnt: %d \tnotyet: %d\n", i, cnt, notyet);
-			if (s.count(v[i]) - 1 + cnt >= v[i]) {
-				//printf("%dth granny can join\n", i);
-				cnt++;
-				notyet = 0;
-			}
-			else {
-				if (s.count(v[i]) - 1 + cnt + notyet >= v[i]) {
-					//printf("%dth granny made it possible\n", i);
-					cnt += notyet;
-					notyet = 0;
-					cnt++;
-				}
-				else {
-					//printf("%dth granny cannot join\n", i);
-					notyet += s.count(v[i]);
-					i += s.count(v[i]) - 1;
-				}
+		for (int i = n-1; i >= 0; i--) {
+			if (v[i] <= i + 1) {
+				cnt = i + 2;
+				break;
 			}
 		}
 		printf("%d\n", cnt);
